@@ -64,10 +64,10 @@ ppBlock (Pandoc.Plain xs) = ppInlines xs
 ppBlock (Pandoc.Div _ xs) = ppNestedBlocks xs
 
 -- Hard unsupported
-ppBlock (Pandoc.RawBlock _ _)     = error "Unsupported: RawBlock"
-ppBlock (Pandoc.Table _ _ _ _ _)  = error "Unsupported: Table"
-ppBlock (Pandoc.LineBlock _)      = error "Unsupported: LineBlock"
-ppBlock (Pandoc.DefinitionList _) = error "Unsupported: DefinitionList"
+ppBlock b@(Pandoc.RawBlock _ _)     = unsupported b
+ppBlock b@(Pandoc.Table _ _ _ _ _)  = unsupported b
+ppBlock b@(Pandoc.LineBlock _)      = unsupported b
+ppBlock b@(Pandoc.DefinitionList _) = unsupported b
 
 
 --------------------------------------------------------------------------------
@@ -105,8 +105,8 @@ ppInline (Pandoc.Math      _ x)  = PP.text x
 ppInline (Pandoc.Span      _ xs) = ppInlines xs
 
 -- Hard unsupported
-ppInline (Pandoc.RawInline _ _) = error "Unsupported: RawInline"
-ppInline (Pandoc.Note _)        = error "Unsupported: Note"
+ppInline i@(Pandoc.RawInline _ _) = unsupported i
+ppInline i@(Pandoc.Note _)        = unsupported i
 
 
 --------------------------------------------------------------------------------
@@ -120,3 +120,8 @@ escapeInlineCode = concatMap $ \c -> case c of
     ']'  -> "\\]"
     '\\' -> "\\\\"
     _    -> [c]
+
+
+--------------------------------------------------------------------------------
+unsupported :: Show markup => markup -> a
+unsupported x = error $ "Unsupported: " ++ show x
