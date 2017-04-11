@@ -1,0 +1,23 @@
+Name:                markdown-to-confluence
+Version:             0.1.0.0
+Synopsis:            Convert markdown to confluence markup using pandoc
+Description:         Convert markdown to confluence markup using pandoc
+License:             BSD3
+License-file:        LICENSE
+Author:              Jasper Van der Jeugt <m@jaspervdj.be>
+Maintainer:          Jasper Van der Jeugt <m@jaspervdj.be>
+Copyright:           2017 Jasper Van der Jeugt
+Category:            Text
+Build-type:          Simple
+Extra-source-files:  ChangeLog.md
+Cabal-version:       >=1.10
+
+Executable markdown-to-confluence
+  Main-is:          Main.hs
+  Hs-source-dirs:   src
+  Default-language: Haskell2010
+  Ghc-options:      -Wall
+
+  Build-depends:
+    base   >= 4.9  && < 4.10,
+    pandoc >= 1.19 && < 1.20
