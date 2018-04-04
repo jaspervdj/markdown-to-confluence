@@ -9,7 +9,7 @@ Maintainer:          Jasper Van der Jeugt <m@jaspervdj.be>
 Copyright:           2017 Jasper Van der Jeugt
 Category:            Text
 Build-type:          Simple
-Extra-source-files:  ChangeLog.md
+Extra-source-files:  CHANGELOG.md
 Cabal-version:       >=1.10
 
 Executable markdown-to-confluence
@@ -19,5 +19,6 @@ Executable markdown-to-confluence
   Ghc-options:      -Wall
 
   Build-depends:
-    base   >= 4.9  && < 4.10,
-    pandoc >= 1.19 && < 1.20
+    base   >= 4.9 && < 4.11,
+    pandoc >= 2.0 && < 2.1,
+    text   >= 1.2 && < 1.3

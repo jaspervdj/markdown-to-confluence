@@ -7,6 +7,7 @@ module Main
 --------------------------------------------------------------------------------
 import           Data.List          (intersperse)
 import           Data.Monoid        ((<>))
+import qualified Data.Text.IO       as T
 import qualified Text.Pandoc        as Pandoc
 import           Text.Pandoc.Pretty (($$), (<+>))
 import qualified Text.Pandoc.Pretty as PP
@@ -15,8 +16,9 @@ import qualified Text.Pandoc.Pretty as PP
 --------------------------------------------------------------------------------
 main :: IO ()
 main = do
-    contents <- getContents
-    case Pandoc.readMarkdown Pandoc.def contents of
+    contents <- T.getContents
+    errOrDoc <- Pandoc.runIO $ Pandoc.readMarkdown Pandoc.def contents
+    case errOrDoc of
         Left err  -> fail (show err)
         Right doc -> putStrLn $ PP.render Nothing $ ppPandoc doc
 
